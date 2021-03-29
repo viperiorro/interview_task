@@ -1,0 +1,355 @@
+============================= test session starts ==============================
+platform linux -- Python 3.9.1, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+rootdir: /home/privateer/PROJECTS/EPAM-interview-task
+plugins: cov-2.11.1
+collected 51 items
+
+test_handler.py FF.FFFFF..F....FF.....F..FF..F.F...F...............      [100%]
+
+=================================== FAILURES ===================================
+_______________________ Test.test_age_invalid_data_1___ ________________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_1___>, age = []
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterValue not raised
+
+test_handler.py:115: AssertionError
+_________________________ Test.test_age_invalid_data_2 _________________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_2>, age = {}
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterValue not raised
+
+test_handler.py:115: AssertionError
+________________________ Test.test_age_invalid_data_4_ _________________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_4_>, age = ''
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterValue not raised
+
+test_handler.py:115: AssertionError
+_______________________ Test.test_age_invalid_data_5_10 ________________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_5_10>, age = '10'
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+
+test_handler.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handler.py:77: in execute
+    age_group = get_age_group(age)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def get_age_group(age):
+>       if age < 1:
+E       TypeError: '<' not supported between instances of 'str' and 'int'
+
+handler.py:86: TypeError
+______________________ Test.test_age_invalid_data_6_True _______________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_6_True>, age = True
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterValue not raised
+
+test_handler.py:115: AssertionError
+______________________ Test.test_age_invalid_data_7_False ______________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_7_False>, age = False
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterValue not raised
+
+test_handler.py:115: AssertionError
+______________________ Test.test_age_invalid_data_8_None _______________________
+
+self = <test_handler.Test testMethod=test_age_invalid_data_8_None>, age = None
+
+    @data([], {}, -1, "", "10", True, False, None)
+    def test_age_invalid_data(self, age):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        with self.assertRaises(handler.InvalidParameterValue):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterValue not raised
+
+test_handler.py:115: AssertionError
+___________________ Test.test_age_valid_data_3__10___Child__ ___________________
+
+self = <test_handler.Test testMethod=test_age_valid_data_3__10___Child__>
+age = 10, age_group = 'Child'
+
+    @unpack
+    @data(
+        (0, "Unknown"),
+        (1, "Child"),
+        (10, "Child"),
+        (11, "Teenager"),
+        (19, "Teenager"),
+        (20, "Adult"),
+        (21, "Adult"),
+    )
+    def test_age_valid_data(self, age, age_group):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": "Ivanov",
+            "Age": age,
+        }
+        expected = {
+            "FullName": "Ivan Ivanov",
+            "AgeGroup": age_group,
+        }
+        result = handler.execute(event)
+>       self.assertDictEqual(result, expected)
+E       AssertionError: {'FullName': 'Ivan Ivanov', 'AgeGroup': None} != {'FullName': 'Ivan Ivanov', 'AgeGroup': 'Child'}
+E       - {'AgeGroup': None, 'FullName': 'Ivan Ivanov'}
+E       ?              ^^^^
+E       
+E       + {'AgeGroup': 'Child', 'FullName': 'Ivan Ivanov'}
+E       ?              ^^^^^^^
+
+test_handler.py:105: AssertionError
+________ Test.test_first_name_invalid_data_1__________________________ _________
+
+self = <test_handler.Test testMethod=test_first_name_invalid_data_1__________________________>
+value = "~!@#$%^&*().<>?\\/'`[]-=+|"
+
+    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0")
+    def test_first_name_invalid_data(self, value):
+        event = {
+            "FirstName": value,
+            "LastName": "Ivanov",
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterType):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterType not raised
+
+test_handler.py:72: AssertionError
+____________________ Test.test_first_name_invalid_data_2__ _____________________
+
+self = <test_handler.Test testMethod=test_first_name_invalid_data_2__>
+value = '"'
+
+    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0")
+    def test_first_name_invalid_data(self, value):
+        event = {
+            "FirstName": value,
+            "LastName": "Ivanov",
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterType):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterType not raised
+
+test_handler.py:72: AssertionError
+________________ Test.test_first_name_invalid_data_type_4_False ________________
+
+self = <test_handler.Test testMethod=test_first_name_invalid_data_type_4_False>
+value = False
+
+    @data(["hello"], 1, True, False, 200, 3.14)
+    def test_first_name_invalid_data_type(self, value):
+        event = {
+            "FirstName": value,
+            "LastName": "Ivanov",
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterType):
+>           handler.execute(event)
+
+test_handler.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def execute(event):
+        # Get parameters
+        first_name = event.get('FirstName')
+        last_name = event.get('LastName')
+        age = event.get('Age')
+    
+        # Validate parameters
+        if not first_name:
+>           raise FirstNameNotFound
+E           exceptions.FirstNameNotFound: E1: 'FirstName' is required parameter
+
+handler.py:55: FirstNameNotFound
+_________ Test.test_last_name_invalid_data_1__________________________ _________
+
+self = <test_handler.Test testMethod=test_last_name_invalid_data_1__________________________>
+value = "~!@#$%^&*().<>?\\/'`[]-=+|"
+
+    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0", "Ivan\1", "Ivan\\1", "\nataly")
+    def test_last_name_invalid_data(self, value):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": value,
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterPattern):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterPattern not raised
+
+test_handler.py:82: AssertionError
+_____________________ Test.test_last_name_invalid_data_2__ _____________________
+
+self = <test_handler.Test testMethod=test_last_name_invalid_data_2__>
+value = '"'
+
+    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0", "Ivan\1", "Ivan\\1", "\nataly")
+    def test_last_name_invalid_data(self, value):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": value,
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterPattern):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterPattern not raised
+
+test_handler.py:82: AssertionError
+___________________ Test.test_last_name_invalid_data_5_Ivan_ ___________________
+
+self = <test_handler.Test testMethod=test_last_name_invalid_data_5_Ivan_>
+value = 'Ivan\x01'
+
+    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0", "Ivan\1", "Ivan\\1", "\nataly")
+    def test_last_name_invalid_data(self, value):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": value,
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterPattern):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterPattern not raised
+
+test_handler.py:82: AssertionError
+__________________ Test.test_last_name_invalid_data_7__ataly ___________________
+
+self = <test_handler.Test testMethod=test_last_name_invalid_data_7__ataly>
+value = '\nataly'
+
+    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0", "Ivan\1", "Ivan\\1", "\nataly")
+    def test_last_name_invalid_data(self, value):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": value,
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterPattern):
+>           handler.execute(event)
+E           AssertionError: InvalidParameterPattern not raised
+
+test_handler.py:82: AssertionError
+________________ Test.test_last_name_invalid_data_type_4_False _________________
+
+self = <test_handler.Test testMethod=test_last_name_invalid_data_type_4_False>
+value = False
+
+    @data(["hello"], 1, True, False, 200, 3.14)
+    def test_last_name_invalid_data_type(self, value):
+        event = {
+            "FirstName": "Ivan",
+            "LastName": value,
+            "Age": 18,
+        }
+        with self.assertRaises(handler.InvalidParameterType):
+>           handler.execute(event)
+
+test_handler.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def execute(event):
+        # Get parameters
+        first_name = event.get('FirstName')
+        last_name = event.get('LastName')
+        age = event.get('Age')
+    
+        # Validate parameters
+        if not first_name:
+            raise FirstNameNotFound
+        if not last_name:
+>           raise LastNameNotFound
+E           exceptions.LastNameNotFound: E2: 'LastName' is required parameter
+
+handler.py:57: LastNameNotFound
+=============================== warnings summary ===============================
+<unknown>:64
+  <unknown>:64: DeprecationWarning: invalid escape sequence \/
+
+<unknown>:74
+  <unknown>:74: DeprecationWarning: invalid escape sequence \/
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+=========================== short test summary info ============================
+FAILED test_handler.py::Test::test_age_invalid_data_1___ - AssertionError: In...
+FAILED test_handler.py::Test::test_age_invalid_data_2 - AssertionError: Inval...
+FAILED test_handler.py::Test::test_age_invalid_data_4_ - AssertionError: Inva...
+FAILED test_handler.py::Test::test_age_invalid_data_5_10 - TypeError: '<' not...
+FAILED test_handler.py::Test::test_age_invalid_data_6_True - AssertionError: ...
+FAILED test_handler.py::Test::test_age_invalid_data_7_False - AssertionError:...
+FAILED test_handler.py::Test::test_age_invalid_data_8_None - AssertionError: ...
+FAILED test_handler.py::Test::test_age_valid_data_3__10___Child__ - Assertion...
+FAILED test_handler.py::Test::test_first_name_invalid_data_1__________________________
+FAILED test_handler.py::Test::test_first_name_invalid_data_2__ - AssertionErr...
+FAILED test_handler.py::Test::test_first_name_invalid_data_type_4_False - exc...
+FAILED test_handler.py::Test::test_last_name_invalid_data_1__________________________
+FAILED test_handler.py::Test::test_last_name_invalid_data_2__ - AssertionErro...
+FAILED test_handler.py::Test::test_last_name_invalid_data_5_Ivan_ - Assertion...
+FAILED test_handler.py::Test::test_last_name_invalid_data_7__ataly - Assertio...
+FAILED test_handler.py::Test::test_last_name_invalid_data_type_4_False - exce...
+================== 16 failed, 35 passed, 2 warnings in 0.22s ===================
