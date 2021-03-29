@@ -123,7 +123,7 @@ class Test(TestCase):
         result = handler.execute(event)
         self.assertDictEqual(result, expected)
 
-    @data([], {}, -1, "", "10", True, False, None)
+    @data([], {}, -1, 9000, 33.333, "", "10", True, False, None)
     def test_age_invalid_data(self, age):
         event = {
             "FirstName": "Ivan",
