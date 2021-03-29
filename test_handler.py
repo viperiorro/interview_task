@@ -61,23 +61,42 @@ class Test(TestCase):
         with self.assertRaises(handler.InvalidParameterType):
             handler.execute(event)
 
-    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0")
+    data(
+        "~!@#$%^&*().<>?\/'`[]-=+|",
+        '"',
+        "1Ivan1",
+        "0Ivan0",
+        "Ivan\1",
+        "Ivan\\1",
+        "\nataly",
+    )
+
     def test_first_name_invalid_data(self, value):
         event = {
             "FirstName": value,
             "LastName": "Ivanov",
             "Age": 18,
         }
+        # ! Which exception we should raise?
         with self.assertRaises(handler.InvalidParameterType):
             handler.execute(event)
 
-    @data("~!@#$%^&*().<>?\/'`[]-=+|", '"', "1Ivan1", "0Ivan0", "Ivan\1", "Ivan\\1", "\nataly")
+    @data(
+        "~!@#$%^&*().<>?\/'`[]-=+|",
+        '"',
+        "1Ivan1",
+        "0Ivan0",
+        "Ivan\1",
+        "Ivan\\1",
+        "\nataly",
+    )
     def test_last_name_invalid_data(self, value):
         event = {
             "FirstName": "Ivan",
             "LastName": value,
             "Age": 18,
         }
+        # ! Which exception we should raise?
         with self.assertRaises(handler.InvalidParameterPattern):
             handler.execute(event)
 
